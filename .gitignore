@@ -1,0 +1,10 @@
+build/
+vendor/
+.drush/
+.idea/
+.composer/
+composer.lock
+docker-compose.*.yml
+
+/.mysql_history
+/.bash_history
