@@ -2,7 +2,7 @@
 
 * `docker-compose up -d`
 * `docker-compose exec php composer install`
-* `docker-compose exec php ./vendor/bin/run backdrop:setup`
+* `docker-compose exec php ./vendor/bin/taskman backdrop:install`
 
 ## Play with drush
 
