@@ -4,19 +4,19 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
-        "backdrop/backdrop": "1.12.6",
+        "backdrop/backdrop": "1.13.2",
         "backdrop-contrib/drush": "0.1.0",
         "phptaskman/drupal": "^0.1",
-        "drush/drush": "^8.2"
+        "drush/drush": "^8.2.3"
     },
     "repositories": [
         {
             "type": "package",
             "package": {
                 "name": "backdrop/backdrop",
-                "version": "1.12.6",
+                "version": "1.13.2",
                 "dist": {
-                    "url": "https://github.com/backdrop/backdrop/releases/download/1.12.6/backdrop.zip",
+                    "url": "https://github.com/backdrop/backdrop/releases/download/1.13.2/backdrop.zip",
                     "type": "zip"
                 },
                 "source": {
