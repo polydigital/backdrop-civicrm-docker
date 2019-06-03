@@ -51,3 +51,5 @@ commands:
         --sites-subdir=${backdrop.site.sites_subdir}
         --db-url="${backdrop.database.scheme}://${backdrop.database.user}:${backdrop.database.password}@${backdrop.database.host}:${backdrop.database.port}/${backdrop.database.name}"
         ${backdrop.site.profile}
+    - ./vendor/bin/drush --root=${backdrop.root}
+      user-password ${backdrop.account.name} --password=${backdrop.account.password}
