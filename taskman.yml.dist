@@ -23,7 +23,7 @@ backdrop:
     port: "3306"
     name: "backdrop"
     user: "root"
-    password: ""
+    password: "root"
 
   site-install:
     options:
@@ -43,12 +43,10 @@ commands:
     - { task: "chmod", file: "${backdrop.root}/files", permissions: 0777, recursive: true }
     - { task: "remove", file: "${backdrop.root}/settings.local.php" }
     - { task: "append", file: "${backdrop.root}/settings.local.php", text: "<?php\n" }
-    - { task: "append", file: "${backdrop.root}/settings.local.php", text: "$database = 'mysql://root:@db/backdrop';" }
+    - { task: "append", file: "${backdrop.root}/settings.local.php", text: "$database = 'mysql://root:root@db:3306/backdrop';" }
   backdrop:install:
     - ./vendor/bin/drush --root=${backdrop.root}
       si
-        --account-name=${backdrop.site-install.options.account-name}
-        --account-pass=${backdrop.site-install.options.account-pass}
         --account-mail=${backdrop.site-install.options.account-mail}
         --sites-subdir=${backdrop.site.sites_subdir}
         --db-url="${backdrop.database.scheme}://${backdrop.database.user}:${backdrop.database.password}@${backdrop.database.host}:${backdrop.database.port}/${backdrop.database.name}"

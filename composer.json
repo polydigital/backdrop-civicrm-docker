@@ -32,7 +32,7 @@
                 "name": "backdrop-contrib/drush",
                 "version": "0.1.0",
                 "dist": {
-                    "url": "https://github.com/backdrop-contrib/drush/releases/download/0.1.0/drush.zip",
+                    "url": "https://github.com/backdrop-contrib/drush/archive/167-add-missing-parameters.zip",
                     "type": "zip"
                 },
                 "source": {
