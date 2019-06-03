@@ -9,4 +9,4 @@
 
 * `docker-compose exec php ./vendor/bin/drush --root=build status`
 
-Backdrop should be available at: http://127.0.0.1:8080/build
+Backdrop should be available at: http://127.0.0.1:8080
