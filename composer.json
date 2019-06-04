@@ -7,7 +7,7 @@
         "backdrop/backdrop": "1.13.2",
         "backdrop-contrib/drush": "0.1.0",
         "phptaskman/drupal": "^0.1",
-        "drush/drush": "^8.2.3"
+        "drush/drush": "^8.2"
     },
     "repositories": [
         {
@@ -32,7 +32,7 @@
                 "name": "backdrop-contrib/drush",
                 "version": "0.1.0",
                 "dist": {
-                    "url": "https://github.com/backdrop-contrib/drush/archive/167-add-missing-parameters.zip",
+                    "url": "https://github.com/backdrop-contrib/drush/archive/1.x-0.x.zip",
                     "type": "zip"
                 },
                 "source": {
