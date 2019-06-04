@@ -42,10 +42,5 @@
                 }
             }
         }
-    ],
-    "scripts": {
-        "post-install-cmd": [
-            "./vendor/bin/taskman backdrop:setup"
-        ]
-    }
+    ]
 }

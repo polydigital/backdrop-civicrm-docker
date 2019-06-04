@@ -33,4 +33,3 @@ services:
     image: percona/percona-server:5.7
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_ROOT_PASSWORD: root
