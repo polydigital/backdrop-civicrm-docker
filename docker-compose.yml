@@ -18,7 +18,6 @@ services:
         TIMEZONE: Europe/Brussels
     volumes:
       - .:/var/www
-      - /var/run/docker.sock:/var/run/docker.sock
     restart: always
     working_dir: "/var/www"
     depends_on:
