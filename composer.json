@@ -1,30 +1,12 @@
 {
-    "name": "backdrop-ops/docker",
+    "name": "backdrop-docker/backdrop",
     "description": "Run Backdrop using Docker containers.",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
-        "backdrop/backdrop": "1.13.2",
-        "backdrop/drush": "^0.1",
+        "backdrop/backdrop": "^1",
+        "backdrop/drush": "^1",
         "phptaskman/drupal": "^0.1",
         "drush/drush": "^8.2"
-    },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "backdrop/backdrop",
-                "version": "1.13.2",
-                "dist": {
-                    "url": "https://github.com/backdrop/backdrop/releases/download/1.13.2/backdrop.zip",
-                    "type": "zip"
-                },
-                "source": {
-                    "url": "https://github.com/backdrop/backdrop/",
-                    "type": "git",
-                    "reference": "1.x"
-                }
-            }
-        }
-    ]
+    }
 }

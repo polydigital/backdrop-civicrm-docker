@@ -38,7 +38,7 @@ backdrop:
 commands:
   backdrop:install:
     - { task: "copy", from: "vendor/backdrop/backdrop/", to: "${backdrop.root}", force: true }
-    - { task: "copy", from: "vendor/backdrop-contrib/drush/", to: ".drush/commands", force: true }
+    - { task: "copy", from: "vendor/backdrop/drush/", to: ".drush/commands", force: true }
     - ./vendor/bin/drush cc drush
     - { task: "chmod", file: "${backdrop.root}/files", permissions: 0777, recursive: true }
     - { task: "append", file: "${backdrop.root}/settings.local.php", text: "<?php\n" }
@@ -51,6 +51,7 @@ commands:
         ${backdrop.site.profile}
     - ./vendor/bin/drush --root=${backdrop.root}
       user-password ${backdrop.account.name} --password=${backdrop.account.password}
+    - { task: "chmod", file: "${backdrop.root}/files", permissions: 0777, recursive: true }
   backdrop:reset:
     - { task: "remove", file: "${backdrop.root}/settings.local.php" }
     - { task: "remove", file: "${backdrop.root}/files/config_a1614e81308b9e6b86be181ef0914335" }
