@@ -1,4 +1,6 @@
 #!/bin/bash
+./wait-for-it/wait-for-it.sh $BACKDROP_DB_HOST:$BACKDROP_DB_PORT
+
 
 # this entrpoint to docker container for backdrop will check for
 # backdrop webserver files and if they don't exist then it will
