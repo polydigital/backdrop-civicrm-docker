@@ -9,14 +9,16 @@
 
 install_backdrop(){
     ./vendor/bin/drush cc drush
-    cp -r ./vendor/backdrop/backdrop ./build
+    cp -r ./vendor/tabroughton/backdrop ./build
     cp -r ./vendor/backdrop/drush ./.drush/commands
-
-    ./vendor/bin/drush --root=build si \
-	  --account-mail=tom@polydigital.co.uk \
-	  --db-url=mysql://$BACKDROP_DB_USER:$BACKDROP_DB_PASSWORD@$BACKDROP_DB_HOST:$BACKDROP_DB_PORT/$BACKDROP_DB_NAME
-
-    ./vendor/bin/drush --root=build user-password admin --password=$BACKDROP_ADMIN_PASSWORD
+    cp ./install.core.inc ./build/core/includes/
+    cp ./install.inc ./build/core/includes/
+    
+#    ./vendor/bin/drush --root=build si \
+#	  --account-mail=tom@polydigital.co.uk \
+#	  --db-url=mysql://$BACKDROP_DB_USER:$BACKDROP_DB_PASSWORD@$BACKDROP_DB_HOST:$BACKDROP_DB_PORT/$BACKDROP_DB_NAME
+#
+#    ./vendor/bin/drush --root=build user-password admin --password=$BACKDROP_ADMIN_PASSWORD
 }
 
 # let's check to see if composer has already installed the files
@@ -30,4 +32,13 @@ if [ ! -f /var/www/html/build/settings.php ]; then
     install_backdrop
 fi
 
-php-fpm # -F -R
+# this section is copied from the php:fpm official docker image
+# entrypoint and has decreased the speed of container stop/restart time
+set -e
+
+# first arg is `-f` or `--some-option`
+if [ "${1#-}" != "$1" ]; then
+	set -- php-fpm "$@"
+fi
+
+exec "$@"

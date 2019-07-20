@@ -59,3 +59,4 @@ WORKDIR /var/www
 #ADD --chown=root:www-data entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/var/www/docker/php/entrypoint.sh"]
+CMD ["php-fpm"]
