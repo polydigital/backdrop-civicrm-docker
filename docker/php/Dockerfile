@@ -1,7 +1,7 @@
 FROM php:7.3-fpm
 ARG TIMEZONE
 
-RUN apt-get update && apt-get install -y mysql-client unzip curl sqlite3 git
+RUN apt-get update && apt-get install -y mariadb-client unzip curl sqlite3 git
 
 # install the PHP extensions we need and remove dependencies once its built.
 RUN set -ex; \
@@ -43,7 +43,7 @@ RUN set -ex; \
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	rm -rf /var/lib/apt/lists/*
 
-ADD . /
+#ADD . /
 
 # Set timezone
 RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone
@@ -55,3 +55,7 @@ RUN usermod -u 1000 www-data
 USER www-data
 
 WORKDIR /var/www
+
+#ADD --chown=root:www-data entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/var/www/docker/php/entrypoint.sh"]

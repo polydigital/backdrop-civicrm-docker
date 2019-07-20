@@ -1,7 +1,8 @@
-version: '2'
+version: '3'
 services:
   web:
     image: nginx
+    container_name: nginxbackdrop
     ports:
       - "8080:80"
     volumes:
@@ -15,11 +16,19 @@ services:
     build:
       context: docker/php
       args:
-        TIMEZONE: Europe/Brussels
+        TIMEZONE: Europe/London
+    container_name: backdrop
     volumes:
       - .:/var/www
     restart: always
     working_dir: "/var/www"
+    environment:
+      BACKDROP_DB_HOST: "${BACKDROP_DB_HOST}"
+      BACKDROP_DB_PORT: "${BACKDROP_DB_PORT}"
+      BACKDROP_DB_NAME: "${BACKDROP_DB_NAME}"
+      BACKDROP_DB_USER: "${BACKDROP_DB_USER}"
+      BACKDROP_DB_PASSWORD: "${BACKDROP_DB_USER_PASSWORD}"
+      BACKDROP_ADMIN_PASS: "${BACKDROP_ADMIN_PASS}"
     depends_on:
       - db
       - composer
@@ -29,6 +38,20 @@ services:
       - .:/var/www
     working_dir: "/var/www"
   db:
-    image: percona/percona-server:5.7
+    image: mariadb:latest
+    container_name: ${BACKDROP_DB_HOST}
+    ports:
+      - ${BACKDROP_DB_PORT}:3306
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./docker/mysql/custom-mysql.conf:/etc/mysql/conf.d/custom.cnf
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: "${BACKDROP_DB_NAME}"
+      MYSQL_ROOT_PASSWORD: "${BACKDROP_DB_ROOT_PASSWORD}"
+      MYSQL_USER: "${BACKDROP_DB_USER}"
+      MYSQL_PASSWORD: "${BACKDROP_DB_USER_PASSWORD}"
+      
+networks:
+  default:
+    external:
+      name: web

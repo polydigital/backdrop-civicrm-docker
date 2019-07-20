@@ -1,12 +1,9 @@
-{
+ {
     "name": "backdrop-docker/backdrop",
     "description": "Run Backdrop using Docker containers.",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "require-dev": {
-        "backdrop/backdrop": "^1",
-        "backdrop/drush": "^1",
-        "phptaskman/drupal": "^0.1",
-        "drush/drush": "^8.2"
+    "require": {
+        "backdrop/backdrop": "1.13.2-rc2",
+        "backdrop/drush": "1.0.0",
+        "drush/drush": "8.3.0"
     }
 }
