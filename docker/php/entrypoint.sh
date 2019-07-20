@@ -11,14 +11,16 @@ install_backdrop(){
     ./vendor/bin/drush cc drush
     cp -r ./vendor/tabroughton/backdrop ./build
     cp -r ./vendor/backdrop/drush ./.drush/commands
-    cp ./install.core.inc ./build/core/includes/
-    cp ./install.inc ./build/core/includes/
+
+    # the following is required to work around issue #2
+    # when fix is merged upstream we can remove this hack
+    cp ./install.inc ./build/core/includes/ #remove this file when fixed 
     
-#    ./vendor/bin/drush --root=build si \
-#	  --account-mail=tom@polydigital.co.uk \
-#	  --db-url=mysql://$BACKDROP_DB_USER:$BACKDROP_DB_PASSWORD@$BACKDROP_DB_HOST:$BACKDROP_DB_PORT/$BACKDROP_DB_NAME
-#
-#    ./vendor/bin/drush --root=build user-password admin --password=$BACKDROP_ADMIN_PASSWORD
+    ./vendor/bin/drush --root=build si \
+	  --account-mail=tom@polydigital.co.uk \
+	  --db-url=mysql://$BACKDROP_DB_USER:$BACKDROP_DB_PASSWORD@$BACKDROP_DB_HOST:$BACKDROP_DB_PORT/$BACKDROP_DB_NAME
+
+    ./vendor/bin/drush --root=build user-password admin --password=$BACKDROP_ADMIN_PASSWORD
 }
 
 # let's check to see if composer has already installed the files
