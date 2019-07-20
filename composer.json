@@ -1,8 +1,21 @@
  {
     "name": "backdrop-docker/backdrop",
-    "description": "Run Backdrop using Docker containers.",
+     "description": "Run Backdrop using Docker containers.",
+     "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "tabroughton/backdrop",
+                "version": "1.13.2",
+                "dist": {
+                    "url": "https://github.com/backdrop/backdrop/archive/1.13.2.zip",
+                    "type": "zip"
+                }
+            }
+        }
+     ],
     "require": {
-        "backdrop/backdrop": "1.13.2-rc2",
+        "tabroughton/backdrop": "1.13.2.*",
         "backdrop/drush": "1.0.0",
         "drush/drush": "8.3.0"
     }
