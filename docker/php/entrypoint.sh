@@ -1,6 +1,4 @@
 #!/bin/bash
-./wait-for-it/wait-for-it.sh $BACKDROP_DB_HOST:$BACKDROP_DB_PORT
-
 
 # this entrpoint to docker container for backdrop will check for
 # backdrop webserver files and if they don't exist then it will
@@ -17,9 +15,12 @@ install_backdrop(){
     # the following is required to work around issue #2
     # when fix is merged upstream we can remove this hack
     cp ./install.inc ./build/core/includes/ #remove this file when fixed 
-    
+
+    # we use wait for it to ensure the database is ready to connect to
+    ./wait-for-it/wait-for-it.sh -t 60 $BACKDROP_DB_HOST:$BACKDROP_DB_PORT
+
     ./vendor/bin/drush --root=build si \
-	  --account-mail=tom@polydigital.co.uk \
+	  --account-mail=somebody@example.com \
 	  --db-url=mysql://$BACKDROP_DB_USER:$BACKDROP_DB_PASSWORD@$BACKDROP_DB_HOST:$BACKDROP_DB_PORT/$BACKDROP_DB_NAME
 
     ./vendor/bin/drush --root=build user-password admin --password=$BACKDROP_ADMIN_PASSWORD
