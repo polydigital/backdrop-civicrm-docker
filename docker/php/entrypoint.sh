@@ -20,7 +20,7 @@ install_backdrop(){
     ./wait-for-it/wait-for-it.sh -t 60 $BACKDROP_DB_HOST:$BACKDROP_DB_PORT
 
     ./vendor/bin/drush --root=build si \
-	  --account-mail=somebody@example.com \
+	  --account-mail=$BACKDROP_ADMIN_EMAIL \
 	  --db-url=mysql://$BACKDROP_DB_USER:$BACKDROP_DB_PASSWORD@$BACKDROP_DB_HOST:$BACKDROP_DB_PORT/$BACKDROP_DB_NAME
 
     ./vendor/bin/drush --root=build user-password admin --password=$BACKDROP_ADMIN_PASSWORD
