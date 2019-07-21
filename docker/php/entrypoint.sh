@@ -11,6 +11,7 @@ install_backdrop(){
     ./vendor/bin/drush cc drush
     cp -r ./vendor/tabroughton/backdrop ./build
     cp -r ./vendor/backdrop/drush ./.drush/commands
+    cp -r ./vendor/tabroughton/civicrm-backdrop ./build/modules/civicrm
 
     # the following is required to work around issue #2
     # when fix is merged upstream we can remove this hack

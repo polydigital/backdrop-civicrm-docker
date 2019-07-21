@@ -27,6 +27,7 @@ RUN set -ex; \
 		opcache \
 		pdo_mysql \
 		zip \
+		mysqli \
 	; \
 	\
 # reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies

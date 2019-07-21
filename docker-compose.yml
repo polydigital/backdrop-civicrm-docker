@@ -31,23 +31,37 @@ services:
       BACKDROP_ADMIN_EMAIL: "${BACKDROP_ADMIN_EMAIL}"
       BACKDROP_ADMIN_PASSWORD: "${BACKDROP_ADMIN_PASSWORD}"
     depends_on:
-      - db
+      - dbbackdrop
+      - dbcivicrm
       - composer
   composer:
     image: composer
     volumes:
       - .:/var/www
     working_dir: "/var/www"
-  db:
+  dbbackdrop:
     image: mariadb:latest
     container_name: ${BACKDROP_DB_HOST}
     ports:
       - ${BACKDROP_DB_PORT}:3306
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./mysql/backdrop:/var/lib/mysql
       - ./docker/mysql/custom-mysql.conf:/etc/mysql/conf.d/custom.cnf
     environment:
       MYSQL_DATABASE: "${BACKDROP_DB_NAME}"
+      MYSQL_ROOT_PASSWORD: "${BACKDROP_DB_ROOT_PASSWORD}"
+      MYSQL_USER: "${BACKDROP_DB_USER}"
+      MYSQL_PASSWORD: "${BACKDROP_DB_USER_PASSWORD}"
+  dbcivicrm:
+    image: mariadb:latest
+    container_name: ${CIVICRM_DB_HOST}
+    ports:
+      - ${CIVICRM_DB_PORT}:3306
+    volumes:
+      - ./mysql/civicrm:/var/lib/mysql
+      - ./docker/mysql/custom-mysql.conf:/etc/mysql/conf.d/custom.cnf
+    environment:
+      MYSQL_DATABASE: "${CIVICRM_DB_NAME}"
       MYSQL_ROOT_PASSWORD: "${BACKDROP_DB_ROOT_PASSWORD}"
       MYSQL_USER: "${BACKDROP_DB_USER}"
       MYSQL_PASSWORD: "${BACKDROP_DB_USER_PASSWORD}"

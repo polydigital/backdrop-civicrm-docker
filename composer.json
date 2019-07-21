@@ -1,6 +1,7 @@
  {
     "name": "backdrop-docker/backdrop",
      "description": "Run Backdrop using Docker containers.",
+     "minimum-stability": "dev",
      "repositories": [
         {
             "type": "package",
@@ -12,11 +13,23 @@
                     "type": "zip"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "tabroughton/civicrm-backdrop",
+                "version": "5.15.1",
+                "dist": {
+                    "url": "https://download.civicrm.org/civicrm-5.15.1-backdrop.tar.gz",
+                    "type": "tar"
+                }
+            }
         }
      ],
     "require": {
         "tabroughton/backdrop": "1.13.2.*",
         "backdrop/drush": "1.0.0",
-        "drush/drush": "8.3.0"
+        "drush/drush": "8.3.0",
+	"tabroughton/civicrm-backdrop": "5.15.1.*"
     }
 }
