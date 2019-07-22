@@ -15,16 +15,32 @@ install_backdrop(){
 
     # the following is required to work around issue #2
     # when fix is merged upstream we can remove this hack
-    cp ./install.inc ./build/core/includes/ #remove this file when fixed 
+    cp ./install.inc ./build/core/includes/ #remove this file when fixed
+
+    # the following is required as you can't enable civicrm before db installed
+    # and you can't run local drush commands in modules that aren't enabled
+    cp ./backdrop.drush.inc ./.drush/commands/
+    cp ./build/modules/civicrm/backdrop/drush/civicrm.drush.inc ./.drush/commands/commands/
+
+    ./vendor/bin/drush cc drush
 
     # we use wait for it to ensure the database is ready to connect to
     ./wait-for-it/wait-for-it.sh -t 60 $BACKDROP_DB_HOST:$BACKDROP_DB_PORT
 
+    echo "installing backdrop"
     ./vendor/bin/drush --root=build si \
 	  --account-mail=$BACKDROP_ADMIN_EMAIL \
 	  --db-url=mysql://$BACKDROP_DB_USER:$BACKDROP_DB_PASSWORD@$BACKDROP_DB_HOST:$BACKDROP_DB_PORT/$BACKDROP_DB_NAME
 
     ./vendor/bin/drush --root=build user-password admin --password=$BACKDROP_ADMIN_PASSWORD
+
+    echo "installing civicrm"
+    ./vendor/bin/drush civicrm-install \
+                        --root=build \
+                        --dbuser=$BACKDROP_DB_USER \
+                        --dbpass=$BACKDROP_DB_PASSWORD \
+                        --dbhost=$CIVICRM_DB_HOST \
+                        --dbname=$CIVICRM_DB_NAME
 }
 
 # let's check to see if composer has already installed the files
