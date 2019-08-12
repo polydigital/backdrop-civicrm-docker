@@ -20,7 +20,9 @@ install_backdrop(){
     # the following is required as you can't enable civicrm before db installed
     # and you can't run local drush commands in modules that aren't enabled
     cp ./backdrop.drush.inc ./.drush/commands/
-    cp ./build/modules/civicrm/backdrop/drush/civicrm.drush.inc ./.drush/commands/commands/
+    #    cp ./build/modules/civicrm/backdrop/drush/civicrm.drush.inc ./.drush/commands/commands/
+    # currently using local file copied from dev backdrop civcrm drush
+    cp ./civicrm.drush.inc ./.drush/commands/commands/
 
     ./vendor/bin/drush cc drush
 
@@ -40,7 +42,9 @@ install_backdrop(){
                         --dbuser=$BACKDROP_DB_USER \
                         --dbpass=$BACKDROP_DB_PASSWORD \
                         --dbhost=$CIVICRM_DB_HOST \
-                        --dbname=$CIVICRM_DB_NAME
+                        --dbname=$CIVICRM_DB_NAME \
+                        --site_url=localhost:8080 \
+			--load_generated_data=true
 }
 
 # let's check to see if composer has already installed the files
