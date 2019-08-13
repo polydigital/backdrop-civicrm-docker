@@ -13,10 +13,6 @@ install_backdrop(){
     cp -r ./vendor/backdrop/drush ./.drush/commands
     cp -r ./vendor/tabroughton/civicrm-backdrop ./build/modules/civicrm
 
-    # the following is required to work around issue #2
-    # when fix is merged upstream we can remove this hack
-    cp ./install.inc ./build/core/includes/ #remove this file when fixed
-
     # the following is required as you can't enable civicrm before db installed
     # and you can't run local drush commands in modules that aren't enabled
     cp ./backdrop.drush.inc ./.drush/commands/
