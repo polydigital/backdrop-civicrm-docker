@@ -14,10 +14,6 @@ install_backdrop(){
     cp -r ./vendor/tabroughton/backdrop ./build
     cp -r ./vendor/backdrop/drush ./.drush/commands
 
-    # the following is required as you can't enable civicrm before db installed
-    # and you can't run local drush commands in modules that aren't enabled
-    cp ./backdrop.drush.inc ./.drush/commands/
-
     # we use wait for it to ensure the database is ready to connect to
     ./wait-for-it/wait-for-it.sh -t 60 $BACKDROP_DB_HOST:$BACKDROP_DB_PORT
     
@@ -31,6 +27,9 @@ install_backdrop(){
     echo "installing civicrm"
     cp -r ./vendor/tabroughton/civicrm-backdrop ./build/modules/civicrm
 
+    #following sed command is hack to get around issue #17
+    # this will need removing if upstream pull request to add civicrm-install to whitelist is accepted
+    sed -i "/  \$safe_commands = array(/a 'civicrm-install'," .drush/commands/backdrop.drush.inc
     
     # currently using local file copied from dev backdrop civcrm drush
     cp ./civicrm.drush.inc ./.drush/commands/
