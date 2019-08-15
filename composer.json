@@ -24,11 +24,23 @@
                     "type": "tar"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "backdrop-contrib/drush",
+                "version": "dev-master",
+                "source": {
+		    "url": "https://github.com/backdrop-contrib/drush.git",
+                    "type": "git",
+		    "reference":"1.x-1.x"
+                }
+            }
         }
      ],
     "require": {
         "tabroughton/backdrop": "1.13.3.*",
-        "backdrop/drush": "1.0.0",
+        "backdrop-contrib/drush": "dev-master",
         "drush/drush": "8.3.0",
 	"tabroughton/civicrm-backdrop": "5.16.1.*"
     }

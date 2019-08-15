@@ -12,7 +12,7 @@ install_backdrop(){
 
     echo "installing backdrop"
     cp -r ./vendor/tabroughton/backdrop ./build
-    cp -r ./vendor/backdrop/drush ./.drush/commands
+    cp -r ./vendor/backdrop-contrib/drush ./.drush/commands
 
     # we use wait for it to ensure the database is ready to connect to
     ./wait-for-it/wait-for-it.sh -t 60 $BACKDROP_DB_HOST:$BACKDROP_DB_PORT
