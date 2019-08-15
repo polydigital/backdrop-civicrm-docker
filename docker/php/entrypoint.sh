@@ -9,23 +9,19 @@
 
 install_backdrop(){
     ./vendor/bin/drush cc drush
+
+    echo "installing backdrop"
     cp -r ./vendor/tabroughton/backdrop ./build
     cp -r ./vendor/backdrop/drush ./.drush/commands
-    cp -r ./vendor/tabroughton/civicrm-backdrop ./build/modules/civicrm
 
     # the following is required as you can't enable civicrm before db installed
     # and you can't run local drush commands in modules that aren't enabled
     cp ./backdrop.drush.inc ./.drush/commands/
-    #    cp ./build/modules/civicrm/backdrop/drush/civicrm.drush.inc ./.drush/commands/commands/
-    # currently using local file copied from dev backdrop civcrm drush
-    cp ./civicrm.drush.inc ./.drush/commands/commands/
-
-    ./vendor/bin/drush cc drush
 
     # we use wait for it to ensure the database is ready to connect to
     ./wait-for-it/wait-for-it.sh -t 60 $BACKDROP_DB_HOST:$BACKDROP_DB_PORT
-
-    echo "installing backdrop"
+    
+    ./vendor/bin/drush cc drush
     ./vendor/bin/drush --root=build si \
 	  --account-mail=$BACKDROP_ADMIN_EMAIL \
 	  --db-url=mysql://$BACKDROP_DB_USER:$BACKDROP_DB_PASSWORD@$BACKDROP_DB_HOST:$BACKDROP_DB_PORT/$BACKDROP_DB_NAME
@@ -33,6 +29,14 @@ install_backdrop(){
     ./vendor/bin/drush --root=build user-password admin --password=$BACKDROP_ADMIN_PASSWORD
 
     echo "installing civicrm"
+    cp -r ./vendor/tabroughton/civicrm-backdrop ./build/modules/civicrm
+
+    
+    # currently using local file copied from dev backdrop civcrm drush
+    cp ./civicrm.drush.inc ./.drush/commands/
+    ./vendor/bin/drush cc drush
+    ./vendor/bin/drush cc drush --root=build
+
     ./vendor/bin/drush civicrm-install \
                         --root=build \
                         --dbuser=$BACKDROP_DB_USER \
@@ -41,6 +45,11 @@ install_backdrop(){
                         --dbname=$CIVICRM_DB_NAME \
                         --site_url=$CIVICRM_HOSTNAME:8080 \
 			--load_generated_data=$CIVICRM_GENDATA
+    
+    mv ./.drush/commands/civicrm.drush.inc ./build/modules/civicrm/backdrop/drush/
+    ./vendor/bin/drush cc drush
+    ./vendor/bin/drush cc drush --root=build
+
 }
 
 # let's check to see if composer has already installed the files
