@@ -39,8 +39,8 @@ install_backdrop(){
                         --dbpass=$BACKDROP_DB_PASSWORD \
                         --dbhost=$CIVICRM_DB_HOST \
                         --dbname=$CIVICRM_DB_NAME \
-                        --site_url=localhost:8080 \
-			--load_generated_data=true
+                        --site_url=$CIVICRM_HOSTNAME:8080 \
+			--load_generated_data=false
 }
 
 # let's check to see if composer has already installed the files
