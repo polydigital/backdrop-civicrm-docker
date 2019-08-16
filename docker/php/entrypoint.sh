@@ -26,10 +26,6 @@ install_backdrop(){
 
     echo "installing civicrm"
     cp -r ./vendor/tabroughton/civicrm ./build/modules/civicrm
-
-    #following sed command is hack to get around issue #17
-    # this will need removing if upstream pull request to add civicrm-install to whitelist is accepted
-    sed -i "/  \$safe_commands = array(/a 'civicrm-install'," .drush/commands/backdrop.drush.inc
     
     # currently using local file copied from dev backdrop civcrm drush
     cp ./civicrm.drush.inc ./.drush/commands/
