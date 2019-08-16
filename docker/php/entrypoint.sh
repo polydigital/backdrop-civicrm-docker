@@ -52,13 +52,13 @@ install_backdrop(){
 }
 
 # let's check to see if composer has already installed the files
-if [ ! -f ./vendor/backdrop/backdrop/settings.php ]; then
+if [ ! -f ./vendor/tabroughton/backdrop/settings.php ]; then
     composer install
 fi
 
 # if our the webserver files don't exist then we need to deploy them
 # from the container
-if [ ! -f /var/www/html/build/settings.php ]; then
+if [ ! -f /var/www/build/settings.php ]; then
     install_backdrop
 fi
 
