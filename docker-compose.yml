@@ -51,6 +51,7 @@ services:
     volumes:
       - ./mysql/backdrop:/var/lib/mysql
       - ./docker/mysql/custom-mysql.conf:/etc/mysql/conf.d/custom.cnf
+    restart: always
     environment:
       MYSQL_DATABASE: "${BACKDROP_DB_NAME}"
       MYSQL_ROOT_PASSWORD: "${BACKDROP_DB_ROOT_PASSWORD}"
@@ -64,6 +65,7 @@ services:
     volumes:
       - ./mysql/civicrm:/var/lib/mysql
       - ./docker/mysql/custom-mysql.conf:/etc/mysql/conf.d/custom.cnf
+    restart: always
     environment:
       MYSQL_DATABASE: "${CIVICRM_DB_NAME}"
       MYSQL_ROOT_PASSWORD: "${BACKDROP_DB_ROOT_PASSWORD}"
