@@ -25,7 +25,7 @@ install_backdrop(){
     ./vendor/bin/drush --root=build user-password admin --password=$BACKDROP_ADMIN_PASSWORD
 
     echo "installing civicrm"
-    cp -r ./vendor/tabroughton/civicrm-backdrop ./build/modules/civicrm
+    cp -r ./vendor/tabroughton/civicrm ./build/modules/civicrm
 
     #following sed command is hack to get around issue #17
     # this will need removing if upstream pull request to add civicrm-install to whitelist is accepted
