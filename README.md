@@ -1,6 +1,6 @@
 ## Set up a dev URL on host machine
 
-* `sudo echo >> civicrm.local 127.0.0.1`
+* `sudo echo "civicrm.local 127.0.0.1" >> /etc/hosts`
 
 ## Install Backdrop-civcrm
 
