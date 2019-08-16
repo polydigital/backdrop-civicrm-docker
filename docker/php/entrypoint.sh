@@ -28,7 +28,7 @@ install_backdrop(){
     cp -r ./vendor/tabroughton/civicrm ./build/modules/civicrm
     
     # currently using local file copied from dev backdrop civcrm drush
-    cp ./civicrm.drush.inc ./.drush/commands/
+    cp ./vendor/polydigital/civicrm-backdrop/drush/civicrm.drush.inc ./.drush/commands/
     ./vendor/bin/drush cc drush
     ./vendor/bin/drush cc drush --root=build
 

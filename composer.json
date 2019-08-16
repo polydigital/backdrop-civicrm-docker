@@ -28,12 +28,24 @@
         {
             "type": "package",
             "package": {
+                "name": "polydigital/civicrm-backdrop",
+                "version": "dev-master",
+                "source": {
+		    "url": "https://github.com/polydigital/civicrm-backdrop.git",
+                    "type": "git",
+		    "reference":"a82b1d7f1c64ac52aa37cf4827407cea932ab338"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "backdrop-contrib/drush",
                 "version": "dev-master",
                 "source": {
 		    "url": "https://github.com/backdrop-contrib/drush.git",
                     "type": "git",
-		    "reference":"1.x-1.x"
+		    "reference":"1d4b9ba7dcbe6f8d84ca38d34283a5d18346af6d"
                 }
             }
         }
@@ -42,6 +54,7 @@
         "tabroughton/backdrop": "1.13.3.*",
         "backdrop-contrib/drush": "dev-master",
         "drush/drush": "8.3.0",
-	"tabroughton/civicrm": "5.16.2.*"
+	"tabroughton/civicrm": "5.16.2.*",
+	"polydigital/civicrm-backdrop": "dev-master"
     }
 }
