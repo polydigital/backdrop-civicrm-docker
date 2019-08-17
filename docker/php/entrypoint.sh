@@ -24,6 +24,8 @@ install_backdrop(){
 
     ./vendor/bin/drush --root=build user-password admin --password=$BACKDROP_ADMIN_PASSWORD
 
+    # TODO: set permissions on backdrop files and directories
+    
     echo "installing civicrm"
     cp -r ./vendor/tabroughton/civicrm ./build/modules/civicrm
     
@@ -44,6 +46,13 @@ install_backdrop(){
     mv ./.drush/commands/civicrm.drush.inc ./build/modules/civicrm/backdrop/drush/
     ./vendor/bin/drush cc drush
     ./vendor/bin/drush cc drush --root=build
+
+    # set permissions on civicrm files
+    chmod 765 ./build/files/civicrm
+    chmod 760 ./build/files/civicrm/ConfigAndLog/CiviCRM.*.log
+    chmod -R 760 build/files/civicrm/upload/
+    chmod -R 760 build/files/civicrm/custom/
+
 
 }
 
