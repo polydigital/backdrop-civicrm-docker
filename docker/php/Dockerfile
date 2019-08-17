@@ -14,8 +14,8 @@ RUN set -ex; \
 	\
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
-	    openssl \
-        libzip-dev \
+		openssl \
+		libzip-dev \
 		libjpeg-dev \
 		libpng-dev \
 		libpq-dev \

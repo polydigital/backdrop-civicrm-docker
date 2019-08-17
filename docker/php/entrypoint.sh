@@ -53,7 +53,13 @@ install_backdrop(){
     chmod -R 760 build/files/civicrm/upload/
     chmod -R 760 build/files/civicrm/custom/
 
-
+    # this is the command to run as cron job
+    # it may be better for the host to run the cron
+    # see issue #14
+    ./vendor/bin/drush civicrm-api job.execute \
+		       -r ./build \
+		       -l $CIVICRM_HOSTNAME:8080 \
+		       -u admin
 }
 
 # let's check to see if composer has already installed the files
