@@ -22,6 +22,7 @@ services:
       - .:/var/www
     restart: always
     working_dir: "/var/www"
+    user: www-data
     environment:
       BACKDROP_DB_HOST: "${BACKDROP_DB_HOST}"
       BACKDROP_DB_PORT: "${BACKDROP_DB_PORT}"
