@@ -44,6 +44,13 @@ services:
     volumes:
       - .:/var/www
     working_dir: "/var/www"
+  maildev:
+    image: djfarrelly/maildev:latest
+    container_name: civicrmmail
+    ports:
+      - "1080:80"
+      - "2525:25"
+    restart: always
   dbbackdrop:
     image: mariadb:latest
     container_name: ${BACKDROP_DB_HOST}
