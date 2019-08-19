@@ -7,6 +7,63 @@
 # the environment variables are created on container creation and for
 # development purposes are stored in .env file - see template.env
 
+setup_default_settings(){    
+    echo "Setting up default Org and Email settings..."
+
+    ORGNAME="ACB - A Community Buinsess"
+    DEFAULTEMAIL="acb@civicrm.local"
+
+    vendor/bin/drush cvapi Contact.create id=1 \
+		     sort_name="$ORGNAME" \
+		     display_name="$ORGNAME" \
+		     legal_name="$ORGNAME" \
+		     organization_name="$ORGNAME" \
+		     --root=build
+    
+    vendor/bin/drush cvapi Domain.create id=1 \
+		     name="$ORGNAME" \
+		     description='A community business in testing'  \
+		     --root=build
+
+    # There isn't a default adress so we'll creaete one
+    vendor/bin/drush cvapi Address.create contact_id=1 \
+		     location_type_id="Work" \
+		     is_primary=1 \
+		     street_address="62 Firstline Street" \
+		     city="Sheffield" \
+		     state_province_id="South Yorkshire" \
+		     postal_code="S44 1BT" \
+		     manual_geo_code=0 \
+		     --root=build
+
+    # we are yet to set up incoming email imap/pop3 but when we do we can set these in the following command
+    vendor/bin/drush cvapi MailSettings.create id=1 \
+		     domain_id=1 \
+		     domain='civicrm.local' \
+		     --root=build
+
+    # this command is likely to break, we need to use a get from OptionGroup and use the id from that in the create statement
+    # vendor/bin/drush cvapi OptionGroup.get option_group_id=31 return=id --root=build (look up the option_group_id in api first)
+    vendor/bin/drush cvapi OptionValue.create id=610 \
+		     option_group_id=31 \
+		     label="\"ACB DEMO\" <$DEFAULTEMAIL>" \
+		     is_default=1  \
+		     --root=build
+    
+    vendor/bin/drush cvapi Email.create id=1 \
+		     contact_id=1 \
+		     email="$DEFAULTEMAIL"  \
+		     --root=build
+
+    # this is an example of setting up settings that have an array in it, setting.get returns an array, mailing_backend is an array within it
+    echo '{"mailing_backend":{"outBound_option":"0","smtpServer":"civicrm.local","smtpPort":"2525","smtpAuth":"0","smtpUser":"","smtpPassword":""}}' \
+	| ./vendor/bin/drush civicrm-api --in=json setting.create --root=build
+
+    # the output of this get request combines Domain object with some of the others like the default email option
+    vendor/bin/drush cvapi Contact.get id=1 --root=build
+    vendor/bin/drush cvapi Domain.get --root=build
+}
+
 install_backdrop(){
     ./vendor/bin/drush cc drush
 
@@ -60,7 +117,10 @@ install_backdrop(){
 		       -r ./build \
 		       -l $CIVICRM_HOSTNAME:8080 \
 		       -u admin
+
+    setup_default_settings
 }
+
 
 # let's check to see if composer has already installed the files
 if [ ! -f ./vendor/tabroughton/backdrop/settings.php ]; then
