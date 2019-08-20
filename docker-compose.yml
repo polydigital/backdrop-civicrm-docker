@@ -33,6 +33,7 @@ services:
       ADMIN_EMAIL: "${ADMIN_EMAIL}"
       ADMIN_PASSWORD: "${ADMIN_PASSWORD}"
       ADMIN_API_KEY: "${ADMIN_API_KEY}"
+      CIVICRM_SITE_KEY: "${CIVICRM_SITE_KEY}"
       CIVICRM_DB_HOST: "${CIVICRM_DB_HOST}"      
       CIVICRM_DB_NAME: "${CIVICRM_DB_NAME}"
       CIVICRM_GENDATA: "${CIVICRM_GENDATA}"
@@ -54,6 +55,23 @@ services:
     ports:
       - "1080:80"
       - "2525:25"
+    restart: always
+  cron:
+    build:
+      context: docker/cron
+    container_name: cron
+    volumes:
+      - ./docker/cron/civicrm.cron.sh:/scripts/civicrm.cron.sh
+    environment:
+      ADMIN_USER: "${ADMIN_USER}"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD}"
+      ADMIN_API_KEY: "${ADMIN_API_KEY}"
+      CIVICRM_SITE_KEY: "${CIVICRM_SITE_KEY}"
+      CIVICRM_HOSTNAME: "${CIVICRM_HOSTNAME}"
+    extra_hosts:
+      - "civicrm.local:${HOST_MACHINE_IP}"
+    depends_on:
+      - php
     restart: always
   dbbackdrop:
     image: mariadb:latest

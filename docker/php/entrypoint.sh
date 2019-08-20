@@ -97,7 +97,7 @@ install_backdrop(){
     echo "installing civicrm"
     cp -r ./vendor/tabroughton/civicrm ./build/modules/civicrm
     
-    # currently using local file copied from dev backdrop civcrm drush
+    
     cp ./vendor/polydigital/civicrm-backdrop/drush/civicrm.drush.inc ./.drush/commands/
     ./vendor/bin/drush cc drush
     ./vendor/bin/drush cc drush --root=build
@@ -109,6 +109,7 @@ install_backdrop(){
                         --dbhost=$CIVICRM_DB_HOST \
                         --dbname=$CIVICRM_DB_NAME \
                         --site_url=$CIVICRM_HOSTNAME:8080 \
+			--site_key=$CIVICRM_SITE_KEY \
 			--load_generated_data=$CIVICRM_GENDATA
     
     mv ./.drush/commands/civicrm.drush.inc ./build/modules/civicrm/backdrop/drush/
