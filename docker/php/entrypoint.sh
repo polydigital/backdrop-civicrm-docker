@@ -18,12 +18,23 @@ setup_default_settings(){
 		     display_name="$ORGNAME" \
 		     legal_name="$ORGNAME" \
 		     organization_name="$ORGNAME" \
+		     api_key="$ADMIN_API_KEY" \
 		     --root=build
     
     vendor/bin/drush cvapi Domain.create id=1 \
 		     name="$ORGNAME" \
 		     description='A community business in testing'  \
 		     --root=build
+
+    # link cms user to contact - this might need to be updated so that the contact
+    # is an individual rather than an organsiation in which case we would create
+    # a new contact as type individual with the API key added, get the contact_id
+    # and then use it in the following.  For now we will use the default contact id 1.
+    vendor/bin/drush cvapi UFMatch.create uf_id=1 \
+		     uf_name=$ADMIN_EMAIL \
+		     contact_id=1 \
+		     --root=build
+    
 
     # There isn't a default adress so we'll creaete one
     vendor/bin/drush cvapi Address.create contact_id=1 \
@@ -76,10 +87,10 @@ install_backdrop(){
     
     ./vendor/bin/drush cc drush
     ./vendor/bin/drush --root=build si \
-	  --account-mail=$BACKDROP_ADMIN_EMAIL \
+	  --account-mail=$ADMIN_EMAIL \
 	  --db-url=mysql://$BACKDROP_DB_USER:$BACKDROP_DB_PASSWORD@$BACKDROP_DB_HOST:$BACKDROP_DB_PORT/$BACKDROP_DB_NAME
 
-    ./vendor/bin/drush --root=build user-password admin --password=$BACKDROP_ADMIN_PASSWORD
+    ./vendor/bin/drush --root=build user-password $ADMIN_USER --password=$ADMIN_PASSWORD
 
     # TODO: set permissions on backdrop files and directories
     
