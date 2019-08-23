@@ -97,8 +97,9 @@ install_backdrop(){
     echo "installing civicrm"
     cp -r ./vendor/tabroughton/civicrm ./build/modules/civicrm
     
-    
+    # I sometimes locally test changes to civicrm.drush.inc in which case I'll comment out the following line and uncomment the one after it
     cp ./vendor/polydigital/civicrm-backdrop/drush/civicrm.drush.inc ./.drush/commands/
+    #cp ./civicrm.drush.inc ./.drush/commands/
     ./vendor/bin/drush cc drush
     ./vendor/bin/drush cc drush --root=build
 

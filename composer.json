@@ -33,7 +33,7 @@
                 "source": {
 		    "url": "https://github.com/polydigital/civicrm-backdrop.git",
                     "type": "git",
-		    "reference":"2acc3f04bacd3547e0c6cf6a6d13525e29f60c31"
+		    "reference":"df6c1eee93b920f35318f38ebac2e584f00f2799"
                 }
             }
         },
