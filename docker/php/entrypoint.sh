@@ -119,7 +119,8 @@ install_backdrop(){
 
     # set permissions on civicrm files
     chmod 765 ./build/files/civicrm
-    chmod 760 ./build/files/civicrm/ConfigAndLog/CiviCRM.*.log
+    chmod -R 760 ./build/files/civicrm/ConfigAndLog/
+    chmod  765 ./build/files/civicrm/ConfigAndLog/.htaccess
     chmod -R 760 build/files/civicrm/upload/
     chmod -R 760 build/files/civicrm/custom/
 
