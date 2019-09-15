@@ -18,9 +18,9 @@
             "type": "package",
             "package": {
                 "name": "tabroughton/civicrm",
-                "version": "5.16.2",
+                "version": "5.16.4",
                 "dist": {
-                    "url": "https://download.civicrm.org/civicrm-5.16.2-backdrop.tar.gz",
+                    "url": "https://download.civicrm.org/civicrm-5.16.4-backdrop.tar.gz",
                     "type": "tar"
                 }
             }
@@ -54,7 +54,7 @@
         "tabroughton/backdrop": "1.13.3.*",
         "backdrop-contrib/drush": "dev-master",
         "drush/drush": "8.3.0",
-	"tabroughton/civicrm": "5.16.2.*",
+	"tabroughton/civicrm": "5.16.4.*",
 	"polydigital/civicrm-backdrop": "dev-master"
     }
 }
